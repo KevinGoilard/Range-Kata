@@ -7,7 +7,7 @@ class Interval:
 
     def contains(self, param):
         for i in param:
-            if (i < self.start.value or i == self.start.value and not self.start.is_open) or self.end.is_less_than(i):
+            if self.start.is_more_than(i) or self.end.is_less_than(i):
                 return False
         return True
 
@@ -19,4 +19,7 @@ class Limit:
 
     def is_less_than(self, value):
         return value > self.value or (value == self.value and not self.is_open)
+
+    def is_more_than(self, value):
+        return value < self.value or (value == self.value and not self.is_open)
 
