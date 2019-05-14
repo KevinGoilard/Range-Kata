@@ -34,3 +34,10 @@ class IntervalsTests(unittest.TestCase):
         result = interval.contains({6})
 
         self.assertTrue(result)
+
+    def test_interval_with_close_limit_not_contains_his_endpoint(self):
+        interval = Interval(Limit(2), Limit(6, False))
+
+        result = interval.contains({6})
+
+        self.assertFalse(result)
