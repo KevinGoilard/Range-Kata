@@ -41,3 +41,17 @@ class IntervalsTests(unittest.TestCase):
         result = interval.contains({6})
 
         self.assertFalse(result)
+
+    def test_interval_with_open_limit_contains_his_startpoint(self):
+        interval = Interval(Limit(2), Limit(6))
+
+        result = interval.contains({2})
+
+        self.assertTrue(result)
+
+    def test_interval_with_close_limit_not_contains_his_startpoint(self):
+        interval = Interval(Limit(2, False), Limit(6))
+
+        result = interval.contains({2})
+
+        self.assertFalse(result)
