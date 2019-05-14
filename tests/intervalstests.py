@@ -19,3 +19,10 @@ class IntervalsTests(unittest.TestCase):
         result = interval.contains({-1, 1, 6, 10})
 
         self.assertFalse(result)
+
+    def test_interval_contains_return_false_triangulation(self):
+        interval = Interval(2, 6)
+
+        result = interval.contains({3, 7})
+
+        self.assertFalse(result)
