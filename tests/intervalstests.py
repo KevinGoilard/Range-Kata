@@ -16,7 +16,7 @@ class IntervalsTests(unittest.TestCase):
     def test_interval_contains_return_false(self):
         interval = Interval(2, 6)
 
-        result = interval.contains({-1, 1, 6, 10})
+        result = interval.contains({-1, 3})
 
         self.assertFalse(result)
 

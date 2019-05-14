@@ -6,8 +6,7 @@ class Interval:
         self.end = end
 
     def contains(self, param):
-        if param == {3, 7}:
-            return False
-        if param == {-1, 1, 6, 10}:
-            return False
+        for i in param:
+            if i < self.start or i >= self.end:
+                return False
         return True
