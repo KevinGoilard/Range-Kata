@@ -62,3 +62,17 @@ class IntervalsTests(unittest.TestCase):
         result = interval.get_all_points()
 
         self.assertEqual({2, 3, 4, 5, 6}, result)
+
+    def test_interval_can_return_all_his_points_triangulation(self):
+        interval = Interval(Limit(2), Limit(4))
+
+        result = interval.get_all_points()
+
+        self.assertEqual({2, 3, 4}, result)
+
+    def test_interval_can_return_all_his_points_triangulation(self):
+        interval = Interval(Limit(2), Limit(4, False))
+
+        result = interval.get_all_points()
+
+        self.assertEqual({2, 3}, result)
