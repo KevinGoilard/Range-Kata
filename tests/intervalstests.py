@@ -55,3 +55,10 @@ class IntervalsTests(unittest.TestCase):
         result = interval.contains({2})
 
         self.assertFalse(result)
+
+    def test_interval_can_return_all_his_points(self):
+        interval = Interval(Limit(2), Limit(6))
+
+        result = interval.get_all_points()
+
+        self.assertEqual({2, 3, 4, 5, 6}, result)

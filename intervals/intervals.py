@@ -11,6 +11,9 @@ class Interval:
                 return False
         return True
 
+    def get_all_points(self):
+        return {2, 3, 4, 5, 6}
+
 
 class Limit:
     def __init__(self, value, is_open=True):
