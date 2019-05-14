@@ -27,3 +27,10 @@ class IntervalsTests(unittest.TestCase):
         result = interval.contains({3, 7})
 
         self.assertFalse(result)
+
+    def test_interval_with_open_limit_contains_his_endpoint(self):
+        interval = Interval(Limit(2), Limit(6))
+
+        result = interval.contains({6})
+
+        self.assertTrue(result)

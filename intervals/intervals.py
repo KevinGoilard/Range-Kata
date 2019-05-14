@@ -7,7 +7,7 @@ class Interval:
 
     def contains(self, param):
         for i in param:
-            if i < self.start.value or i >= self.end.value:
+            if i < self.start.value or i > self.end.value:
                 return False
         return True
 
