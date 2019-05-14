@@ -1,5 +1,6 @@
 import unittest
 from intervals.intervals import Interval
+from intervals.intervals import Limit
 
 
 class IntervalsTests(unittest.TestCase):
@@ -7,21 +8,21 @@ class IntervalsTests(unittest.TestCase):
         self.assertTrue(True)
 
     def test_interval_contains_return_true(self):
-        interval = Interval(2, 6)
+        interval = Interval(Limit(2), Limit(6))
 
         result = interval.contains({2, 4})
 
         self.assertTrue(result)
 
     def test_interval_contains_return_false(self):
-        interval = Interval(2, 6)
+        interval = Interval(Limit(2), Limit(6))
 
         result = interval.contains({-1, 3})
 
         self.assertFalse(result)
 
     def test_interval_contains_return_false_triangulation(self):
-        interval = Interval(2, 6)
+        interval = Interval(Limit(2), Limit(6))
 
         result = interval.contains({3, 7})
 

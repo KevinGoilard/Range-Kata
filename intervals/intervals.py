@@ -7,6 +7,12 @@ class Interval:
 
     def contains(self, param):
         for i in param:
-            if i < self.start or i >= self.end:
+            if i < self.start.value or i >= self.end.value:
                 return False
         return True
+
+
+class Limit:
+    def __init__(self, value, is_open=True):
+        self.value = value
+        self.is_open = is_open
