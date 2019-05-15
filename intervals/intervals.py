@@ -12,6 +12,8 @@ class Interval:
         return True
 
     def get_all_points(self):
+        if not self.start.is_open:
+            return set(range(self.start.value + 1, self.end.value + 1))
         if self.end.is_open:
             return set(range(self.start.value, self.end.value + 1))
         return set(range(self.start.value, self.end.value))
