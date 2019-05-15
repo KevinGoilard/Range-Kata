@@ -17,6 +17,9 @@ class Interval:
     def end_points(self):
         return [self.start.get_point(), self.end.get_point()]
 
+    def equals(self, other):
+        return self.start.equals(other.start) and self.end.equals(other.end)
+
 
 class Limit:
     def __init__(self, value, is_open=True):
@@ -32,6 +35,10 @@ class Limit:
     def get_point(self):
         pass
 
+    def equals(self, other):
+        if type(self) != type(other):
+            return False
+        return self.value == other.value and self.is_open == other.is_open
 
 class StartLimit(Limit):
     def get_point(self):

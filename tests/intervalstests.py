@@ -1,4 +1,5 @@
 import unittest
+from parameterized import parameterized
 from intervals.intervals import Interval
 from intervals.intervals import StartLimit
 from intervals.intervals import EndLimit
@@ -112,3 +113,14 @@ class IntervalsTests(unittest.TestCase):
         result = interval.end_points()
 
         self.assertEqual([2, 4], result)
+
+    @parameterized.expand([
+        (Interval(StartLimit(3, False), EndLimit(5)), Interval(StartLimit(3, False), EndLimit(5)), True),
+        (Interval(StartLimit(2, False), EndLimit(10)), Interval(StartLimit(3, False), EndLimit(5)), False),
+        (Interval(StartLimit(3, False), EndLimit(5)), Interval(StartLimit(3, False), EndLimit(5, False)), False),
+        (Interval(StartLimit(3, False), EndLimit(5)), Interval(StartLimit(3), EndLimit(5)), False)
+    ])
+    def test_interval_equals(self, interval, other_interval, expected):
+        result = interval.equals(other_interval)
+
+        self.assertEqual(result, expected)
