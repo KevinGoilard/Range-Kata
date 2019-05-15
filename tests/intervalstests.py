@@ -62,25 +62,53 @@ class IntervalsTests(unittest.TestCase):
 
         result = interval.get_all_points()
 
-        self.assertEqual({2, 3, 4, 5, 6}, result)
+        self.assertEqual({3, 4, 5}, result)
 
     def test_interval_can_return_all_his_points_end_closed(self):
         interval = Interval(StartLimit(2), EndLimit(4, False))
 
         result = interval.get_all_points()
 
-        self.assertEqual({2, 3}, result)
+        self.assertEqual({3, 4}, result)
 
     def test_interval_can_return_all_his_points_start_closed(self):
         interval = Interval(StartLimit(2, False), EndLimit(4))
 
         result = interval.get_all_points()
 
-        self.assertEqual({3, 4}, result)
+        self.assertEqual({2, 3}, result)
 
     def test_interval_can_return_all_his_points_start_and_end_closed(self):
         interval = Interval(StartLimit(2, False), EndLimit(4, False))
 
         result = interval.get_all_points()
 
-        self.assertEqual({3}, result)
+        self.assertEqual({2, 3, 4}, result)
+
+    def test_interval_return_end_points_start_and_end_open(self):
+        interval = Interval(StartLimit(2), EndLimit(4))
+
+        result = interval.end_points()
+
+        self.assertEqual([3, 3], result)
+
+    def test_interval_return_end_points_start_closed(self):
+        interval = Interval(StartLimit(2, False), EndLimit(4))
+
+        result = interval.end_points()
+
+        self.assertEqual([2, 3], result)
+
+    def test_interval_return_end_points_end_closed(self):
+        interval = Interval(StartLimit(2), EndLimit(4, False))
+
+        result = interval.end_points()
+
+        self.assertEqual([3, 4], result)
+
+    def test_interval_return_end_points_start_and_end_closed(self):
+        interval = Interval(StartLimit(2, False), EndLimit(4, False))
+
+        result = interval.end_points()
+
+        self.assertEqual([2, 4], result)
