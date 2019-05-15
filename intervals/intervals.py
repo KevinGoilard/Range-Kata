@@ -12,7 +12,7 @@ class Interval:
         return True
 
     def get_all_points(self):
-        return set(range(self.start.get_point(), self.end.get_point()))
+        return set(range(self.start.get_point(), self.end.get_point() + 1))
 
 
 class Limit:
@@ -37,4 +37,4 @@ class StartLimit(Limit):
 
 class EndLimit(Limit):
     def get_point(self):
-        return self.value + self.is_open
+        return self.value - (not self.is_open)

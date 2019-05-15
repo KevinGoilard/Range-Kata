@@ -78,8 +78,8 @@ class IntervalsTests(unittest.TestCase):
 
         self.assertEqual({3, 4}, result)
 
-    def test_interval_can_return_all_his_points_start_closed(self):
-        interval = Interval(StartLimit(2, False), EndLimit(4,False))
+    def test_interval_can_return_all_his_points_start_and_end_closed(self):
+        interval = Interval(StartLimit(2, False), EndLimit(4, False))
 
         result = interval.get_all_points()
 
