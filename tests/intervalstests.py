@@ -139,3 +139,15 @@ class IntervalsTests(unittest.TestCase):
         result = interval.contains_interval(other_interval)
 
         self.assertEqual(result, expected)
+
+    @parameterized.expand([
+        (Interval(StartLimit(2, False), EndLimit(5)), Interval(StartLimit(7, False), EndLimit(10)), False),
+        (Interval(StartLimit(2, False), EndLimit(10)), Interval(StartLimit(3, False), EndLimit(5)), True),
+        (Interval(StartLimit(3, False), EndLimit(5)), Interval(StartLimit(3, False), EndLimit(5)), True),
+        (Interval(StartLimit(2, False), EndLimit(5)), Interval(StartLimit(3, False), EndLimit(10)), True),
+        (Interval(StartLimit(3, False), EndLimit(5)), Interval(StartLimit(2), EndLimit(10)), True)
+    ])
+    def test_interval_overlaps(self, interval, other_interval, expected):
+        result = interval.overlaps_with(other_interval)
+
+        self.assertEqual(result, expected)

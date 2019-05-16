@@ -20,6 +20,11 @@ class Interval:
     def contains_interval(self, other):
         return self.contains(other.get_all_points())
 
+    def overlaps_with(self, other):
+        self_contains_other_limit = self.contains({other.start.get_point()}) or self.contains({other.end.get_point()})
+        other_contains_self_limit = other.contains({self.start.get_point()}) or other.contains({self.end.get_point()})
+        return self_contains_other_limit or other_contains_self_limit
+
     def equals(self, other):
         return self.start.equals(other.start) and self.end.equals(other.end)
 
