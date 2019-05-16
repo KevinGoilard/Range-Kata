@@ -12,7 +12,7 @@ class IntervalsTests(unittest.TestCase):
     def test_interval_contains_return_true(self):
         interval = Interval(StartLimit(2), EndLimit(6))
 
-        result = interval.contains({2, 4})
+        result = interval.contains({3, 4})
 
         self.assertTrue(result)
 
@@ -30,33 +30,33 @@ class IntervalsTests(unittest.TestCase):
 
         self.assertFalse(result)
 
-    def test_interval_with_open_limit_contains_his_endpoint(self):
+    def test_interval_with_open_limit_not_contains_his_endpoint(self):
         interval = Interval(StartLimit(2), EndLimit(6))
 
         result = interval.contains({6})
 
-        self.assertTrue(result)
+        self.assertFalse(result)
 
-    def test_interval_with_close_limit_not_contains_his_endpoint(self):
+    def test_interval_with_close_limit_contains_his_endpoint(self):
         interval = Interval(StartLimit(2), EndLimit(6, False))
 
         result = interval.contains({6})
 
-        self.assertFalse(result)
+        self.assertTrue(result)
 
-    def test_interval_with_open_limit_contains_his_startpoint(self):
+    def test_interval_with_open_limit_not_contains_his_startpoint(self):
         interval = Interval(StartLimit(2), EndLimit(6))
 
         result = interval.contains({2})
 
-        self.assertTrue(result)
+        self.assertFalse(result)
 
-    def test_interval_with_close_limit_not_contains_his_startpoint(self):
+    def test_interval_with_close_limit_contains_his_startpoint(self):
         interval = Interval(StartLimit(2, False), EndLimit(6))
 
         result = interval.contains({2})
 
-        self.assertFalse(result)
+        self.assertTrue(result)
 
     def test_interval_can_return_all_his_points(self):
         interval = Interval(StartLimit(2), EndLimit(6))
@@ -122,5 +122,20 @@ class IntervalsTests(unittest.TestCase):
     ])
     def test_interval_equals(self, interval, other_interval, expected):
         result = interval.equals(other_interval)
+
+        self.assertEqual(result, expected)
+
+    @parameterized.expand([
+        (Interval(StartLimit(2), EndLimit(5)), Interval(StartLimit(2), EndLimit(5)), True),
+        (Interval(StartLimit(2), EndLimit(5)), Interval(StartLimit(2, False), EndLimit(5)), False),
+        (Interval(StartLimit(2), EndLimit(5)), Interval(StartLimit(3), EndLimit(10)), False),
+        (Interval(StartLimit(2), EndLimit(5)), Interval(StartLimit(0), EndLimit(4)), False),
+        (Interval(StartLimit(2), EndLimit(5)), Interval(StartLimit(3), EndLimit(5, False)), False),
+        (Interval(StartLimit(2), EndLimit(5)), Interval(StartLimit(3), EndLimit(5)), True),
+        (Interval(StartLimit(2, False), EndLimit(5, False)), Interval(StartLimit(3), EndLimit(5)), True),
+        (Interval(StartLimit(2, False), EndLimit(5, False)), Interval(StartLimit(1, False), EndLimit(6, False)), False)
+    ])
+    def test_interval_contains_interval(self, interval, other_interval, expected):
+        result = interval.contains_interval(other_interval)
 
         self.assertEqual(result, expected)
